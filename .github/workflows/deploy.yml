@@ -35,7 +35,3 @@ jobs:
           path: dist
       - uses: actions/deploy-pages@v4
         id: deploy
-        - name: Setup Pages
-  uses: actions/configure-pages@v5
-  with:
-    enablement: true
