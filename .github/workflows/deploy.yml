@@ -1,3 +1,4 @@
+# Build and publish the Vite application to GitHub Pages.
 name: Publish Nada
 on:
   push:
