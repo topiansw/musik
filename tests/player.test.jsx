@@ -17,6 +17,8 @@ it('mengikuti event iframe, mencatat PLAYING sekali, melewati 150, dan membersih
   const view=render(<Player request={{list,id:'a'}} onPlayed={played} notify={notify}/>);
   await waitFor(()=>expect(events).toBeDefined());act(()=>events.onReady({target:p}));expect(id).toBe('a');
   function emit(data){state=data;act(()=>events.onStateChange({target:p,data}))}emit(1);emit(1);expect(played).toHaveBeenCalledTimes(1);
+  const hidden=vi.spyOn(document,'hidden','get').mockReturnValue(true);
+  try{act(()=>document.dispatchEvent(new Event('visibilitychange')));emit(1);expect(p.pauseVideo).not.toHaveBeenCalled()}finally{hidden.mockRestore()}
   await user.click(screen.getByRole('button',{name:'Jeda'}));expect(p.pauseVideo).toHaveBeenCalled();emit(2);expect(screen.getByRole('button',{name:'Putar'})).toBeTruthy();
   act(()=>events.onError({target:p,data:150}));expect(id).toBe('b');emit(0);expect(p.loadVideoById).toHaveBeenCalledTimes(2);view.unmount();expect(p.destroy).toHaveBeenCalledOnce();
 });

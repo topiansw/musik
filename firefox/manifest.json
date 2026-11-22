@@ -1,0 +1,10 @@
+{
+  "manifest_version": 3,
+  "name": "Nada — Buka Studio",
+  "version": "1.0.0",
+  "description": "Membuka Nada di tab khusus dengan filter domain iklan terbatas.",
+  "action": {"default_title": "Buka Nada"},
+  "permissions": ["declarativeNetRequest"],
+  "background": {"scripts": ["launcher.js"]},
+  "browser_specific_settings": {"gecko": {"id": "studio@topiansw.github.io", "strict_min_version": "128.0"}}
+}
